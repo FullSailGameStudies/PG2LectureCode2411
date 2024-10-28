@@ -5,8 +5,9 @@
 #include <vector>
 #include <string>
 #include "Calculator.h"
-#include <Console.h>
-#include <DataReader.h>
+#include "Console.h"
+#include "Input.h"
+#include "Menu.h"
 
 int AddOne(int localNumber)
 {
@@ -24,8 +25,33 @@ void print(const std::vector<std::string>& names)
 
 int main()
 {
-    Console::ResizeWindow(150, 30);
-    DataReader dataReader;
+    /*  Input and Console examples  */
+
+    std::string myName = Input::GetString("What is your name?");
+    int age = Input::GetInteger("What is your age?", 0, 120);
+
+    Console::Write("Hello Gotham.");
+    Console::Write("Hello Gotham.", ConsoleColor::Yellow, ConsoleColor::Cyan);
+    Console::WriteLine("Hello Gotham.");
+    Console::WriteLine("Hello Gotham.", ConsoleColor::Yellow, ConsoleColor::Cyan);
+    Console::SetCursorLeft(15);
+    Console::SetCursorPosition(5, 10);
+    std::cin.get();
+    
+
+    Menu kidsMenu;
+    bool wasAdded = kidsMenu.AddMenuItem("Dino Nuggies");
+    if (!wasAdded) std::cout << "Item was already on the menu.\n";
+
+    wasAdded = kidsMenu.AddMenuItem("Cheese Pizza");
+    if (!wasAdded) std::cout << "Item was already on the menu.\n";
+    wasAdded = kidsMenu.AddMenuItem("cheese pizza");
+    if (!wasAdded) std::cout << "Item was already on the menu.\n";
+
+    wasAdded = kidsMenu.AddMenuItem("Chicken Fingers");
+    if (!wasAdded) std::cout << "Item was already on the menu.\n";
+
+    kidsMenu.DisplayMenu();
     //
     // CHALLENGE: call the DrawData method on the DataReader instance (dataReader)
     //
@@ -58,7 +84,7 @@ int main()
     double factor = Calculator::mult(5, 3);
 
     //calling a non-static method, use the variable...
-    Calculator t1000;
+    Calculator t1000;//create the object
     int diff = t1000.minus(7, 2);
 
 
