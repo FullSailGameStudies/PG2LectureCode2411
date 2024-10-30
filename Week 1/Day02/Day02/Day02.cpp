@@ -105,11 +105,57 @@ int main()
         This is the way you pass by reference and prevent the method from changing the variable.
     */
     std::vector<int> highScores;
-    for (int i = 0; i < 10; ++i)
-        highScores.push_back(rand());
+    highScores.reserve(10);
+    printInfo(highScores);
+    for (int i = 0; i < 12; ++i)
+    {
+        highScores.push_back(rand() % 5000);
+        printInfo(highScores);
+    }
+    //std::cout << highScores[highScores.capacity() - 1];//???
+
+    print(highScores);
+    //erase all highscores < 2500
+    for (size_t i = 0; i < highScores.size(); i++)
+    {
+        if (highScores[i] < 2500)
+        {
+            highScores.erase(highScores.begin() + i);
+            i--;
+        }
+    }
+    //OR...
+    for (size_t i = 0; i < highScores.size();)
+    {
+        if (highScores[i] < 2500)
+        {
+            highScores.erase(highScores.begin() + i);
+        }
+        else
+            i++;
+    }
+    //OR...
+    for (int i = highScores.size() - 1; i >= 0; i--)
+    {
+        if (highScores[i] < 2500)
+        {
+            highScores.erase(highScores.begin() + i);
+        }
+    }
+    //OR...
+    for(auto i=highScores.begin();i!=highScores.end();)
+    {
+        if (*i < 2500)
+        {
+            i = highScores.erase(i);
+        }
+        else
+            i++;
+    }
+
+    print(highScores);
+
     float avg = average(highScores);
-
-
 
     /*
         CHALLENGE 2:
@@ -146,15 +192,7 @@ int main()
 
     */
     print(highScores);
-
-    for (size_t i = 0; i < highScores.size();)
-    {
-        if (highScores[i] < 2500)
-            highScores.erase(highScores.begin() + i);
-        else
-            ++i;
-    }
-
+    //
 
     /*
         INTERMEDIATE LEVEL...
