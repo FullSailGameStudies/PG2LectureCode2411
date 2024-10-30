@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "FullSailCourse.h"
 
 bool postFix(std::string& hero)
 {
@@ -36,8 +37,23 @@ void printInfo(const std::vector<int>& scores)
     std::cout << "size: " << scores.size() << "\tcapacity: " << scores.capacity() << "\n";
 }
 
+void RandomNums(int& r1, int& r2)
+{
+    r1 = rand();
+    r2 = rand() % 1001;//% divides and returns the remainder
+}
+
 int main()
 {
+    int n1 = 0, n2 = 0;
+    int& num1 = n1;
+    num1++;
+    std::cout << n1 << "\t" << num1 << "\n";
+    std::cout << &n1 << "\n" << &num1 << "\n";
+    std::cin.get();
+    RandomNums(n1, n2);
+    std::cout << n1 << "\t" << n2 << "\n";
+    std::cin.get();
     /*
         ╔══════════════════════════════╗
         ║Parameters: Pass by Reference.║
@@ -56,12 +72,20 @@ int main()
     /*
         CHALLENGE 1:
 
-            Write a method to fill the vector of floats with grades.
+            add a method to FullSailCourse
+            The method should fill a vector of floats with grades.
             1) pass it in by reference
             2) add 10 grades to the vector
+            3) call the method in main
+            4) print the vector in main
 
     */
     std::vector<float> grades;
+    FullSailCourse pg2;
+    pg2.FillGrades(grades);
+    pg2.ShowGrades(grades);
+    std::cin.get();
+    //add a method to FullSailCourse to show the grades
 
 
 
