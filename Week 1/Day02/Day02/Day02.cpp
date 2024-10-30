@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include "FullSailCourse.h"
+#include "Console.h"
 
 bool postFix(std::string& hero)
 {
@@ -43,8 +44,14 @@ void RandomNums(int& r1, int& r2)
     r2 = rand() % 1001;//% divides and returns the remainder
 }
 
+int sum(int& n1, int& n2)
+{
+    return n1 + n2;
+}
+
 int main()
 {
+    //sum(5, 2);
     int n1 = 0, n2 = 0;
     int& num1 = n1;
     num1++;
@@ -107,12 +114,20 @@ int main()
     /*
         CHALLENGE 2:
 
-            Write a method to calculate the stats on a vector of grades
+            Add a method to FullSailCourse to calculate the stats on a vector of grades
             1) create a method to calculate the min, max. 
                 pass the grades vector as a const reference. Use ref parameters for min and max.
             2) call the method in main and print out the min, max.
 
     */
+    float minGrade, maxGrade;
+    pg2.Stats(grades, minGrade, maxGrade);
+    std::cout << "Min: ";
+    Console::Write(std::to_string(minGrade), ((minGrade < 59.5) ? ConsoleColor::Red : ConsoleColor::Green));
+    std::cout << "\tMax: ";
+    //ternary operator
+    Console::WriteLine(std::to_string(maxGrade), ((maxGrade < 59.5) ? ConsoleColor::Red : ConsoleColor::Green));
+    std::cin.get();
 
 
 
