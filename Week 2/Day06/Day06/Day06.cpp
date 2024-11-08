@@ -12,7 +12,15 @@ enum class Weapon
     Sword, Axe, Spear, Mace
 };
 
-
+void Print(const std::map<std::string, double>& grades)
+{
+    std::cout << "\nDCU Grades\n";
+    for (auto& [name,grade] : grades)
+    {
+        std::cout << std::setw(7) << std::right << grade << " ";
+        std::cout << std::left << name << "\n";
+    }
+}
 int main()
 {
 
@@ -27,20 +35,20 @@ int main()
         erase(key) -- returns the # of items removed
 
     */
-    std::map<Weapon, int> backpack;
-    auto inserted = backpack.insert(std::make_pair(Weapon::Sword, 5));
-    backpack[Weapon::Axe] = 3;
+    std::map<Weapon, int> dorasbackpack;
+    auto inserted = dorasbackpack.insert(std::make_pair(Weapon::Sword, 5));
+    dorasbackpack[Weapon::Axe] = 3;
 
-    size_t numberRemoved = backpack.erase(Weapon::Sword);
+    size_t numberRemoved = dorasbackpack.erase(Weapon::Sword);
     if (numberRemoved > 0)
         std::cout << "The Swords were removed.\n";
     else
         std::cout << "Sword was not found in the map.\n";
 
-    std::map<Weapon, int>::iterator found = backpack.find(Weapon::Axe);
-    if (found != backpack.end())
+    std::map<Weapon, int>::iterator found = dorasbackpack.find(Weapon::Axe);
+    if (found != dorasbackpack.end())
     {
-        backpack.erase(found);
+        dorasbackpack.erase(found);
         std::cout << "The Axes were removed.\n";
     }
     else
@@ -57,6 +65,7 @@ int main()
                         use std::setw and std::left and std::right to format the output
                     ask for the name of the student to drop from the grades map
                         use std::getline to get the user's input
+                        std::getline(std::cin,stringvariable);
                     remove the student from the map
                     print message indicating what happened
                     if not found print an error message
@@ -66,11 +75,26 @@ int main()
     */
     srand((unsigned int)time(NULL));
     std::map<std::string, double> grades;
-    grades["Bruce"] = rand() % 101;
-    grades["Dick"] = rand() % 101;
-    grades["Diana"] = rand() % 101;
-    grades["Alfred"] = rand() % 101;
-    grades["Clark"] = rand() % 101;
-    grades["Arthur"] = rand() % 101;
-    grades["Barry"] = rand() % 101;
+    grades["Bruce"] = rand() % 10001 / 100.0;
+    grades["Dick"] = rand() % 10001 / 100.0;
+    grades["Diana"] = rand() % 10001 / 100.0;
+    grades["Alfred"] = rand() % 10001 / 100.0;
+    grades["Clark"] = rand() % 10001 / 100.0;
+    grades["Arthur"] = rand() % 10001 / 100.0;
+    grades["Barry"] = rand() % 10001 / 100.0;
+    do
+    {
+        Print(grades);
+        std::string student;
+        std::cout << "Student to drop: ";
+        std::getline(std::cin, student);
+        if (student.empty()) break;
+
+        auto foundStudent = grades.find(student);
+        if (foundStudent == grades.end())
+            std::cout << student << " is not in the course.\n";
+        else
+            grades.erase(foundStudent);
+
+    } while (true);
 }
