@@ -2,6 +2,8 @@
 //
 
 #include <iostream>
+#include "Sword.h"
+#include "Person.h"
 
 
 /*              CLASSESS
@@ -44,19 +46,37 @@
 
 int main()
 {
-    /*
-        Lecture code: add a Car class
-    
-    */
+    Sword sting(Materials::Titanium, 30.0F, true);//creating a Sword object. An instance of the Sword class.
+    //these setters are no longer needed b/c of the ctor call
+    //sting.SetLength(1.5F);
+    //sting.Sharpness(1.0f);
+    //sting.DoubleBladed(true);
+    //sting.Material();//???how to set the material
+    Sword trainer;
 
+    float length = sting.GetLength();
+    float sharp = sting.Sharpness();
+    bool dblBladed = sting.DoubleBladed();
+    Materials mat = sting.Material();
+    std::cout << "My sword is " << length << " long and has a sharpness level of ";
+    std::cout << sharp << ". " <<
+        ((dblBladed) ? " It is double bladed." : " It is single-bladed.");
+    std::cout << " And is made of " << mat << "\n";
     /*
         CHALLENGE:
-
             Create a Person class.
             Right-Click the project and select "Add > Class..."
 
+        CHALLENGE:
+            Add an age field and a name field to the Person class
+   
+        CHALLENGE:
+            Add Age getter/setter to provide access to the mAge field
+            Add a Name getter/setter for the mName field
     */
-
+    Person alfred(115, "Alfred Pennyworth");
+    //alfred.Name("Alfred Pennyworth");
+    //alfred.Age(115);
 
 
 
@@ -73,10 +93,6 @@ int main()
 
     */
 
-    /*
-        CHALLENGE:
-            Add an age field and a name field to the Person class
-    */
 
 
 
@@ -131,13 +147,6 @@ int main()
     */
 
 
-    /*
-
-        CHALLENGE:
-            Add Age getter/setter to provide access to the mAge field
-            Add a Name getter/setter for the mName field
-    */
-
 
 
 
@@ -165,7 +174,8 @@ int main()
     /*
 
         CHALLENGE:
-            Add a constructor to the Person class to initialize the age and name fields
+            Add a constructor to the Person class to 
+            initialize the age and name fields
     */
 
 
