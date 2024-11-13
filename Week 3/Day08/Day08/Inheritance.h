@@ -6,7 +6,7 @@ public:
 	int x;
 protected:
 	int y;
-protected:
+private:
 	int z;
 };
 
