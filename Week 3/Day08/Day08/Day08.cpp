@@ -10,16 +10,34 @@
 #include "Pistol.h"
 
 
+void CountUp()
+{
+	static int i = 0;
+	std::cout << i << " ";
+	i++;
+}
+
 int main()
 {
-	FlyingCar jetsons(2025,"Tesla","X-Plane",200,300);
+	for (size_t i = 0; i < 10; i++)
+	{
+		CountUp();
+	}
+	std::cout << "\n";
+	Car myRide(1988, "Ford", "Mustang GT 5.0");
+	FlyingCar jetsons(2025, "Tesla", "X-Plane", 200, 300);
+	jetsons.refuel();
+	jetsons.refuel(5);//compile-time polymorphism
+
+	std::cout << myRide.vehicleInformation() << "\n";
+	std::cout << jetsons.vehicleInformation() << "\n";
 	/*
-        ╔═══════════════╗
-        ║  Inheritance  ║
-        ╚═══════════════╝
+		╔═══════════════╗
+		║  Inheritance  ║
+		╚═══════════════╝
 
 								╔═════════╗     ╔══════════╗
-				         class  ║SomeClass║  :  ║OtherClass║
+						 class  ║SomeClass║  :  ║OtherClass║
 								╚═════════╝     ╚══════════╝
 									 │                │
 									 └──┐             └──┐
@@ -32,7 +50,7 @@ int main()
 				public inheritance:
 				protected inheritance:
 				private inheritance: (default if not specified)
-	
+
 
 
 				CONSTRUCTORS: the derived constructor must call a base constructor
@@ -40,31 +58,35 @@ int main()
 
 
 			Lecture Code: add a FlyingCar class that derives from Car
-             
-    */
+
+	*/
 
 
 
 	/*
-        ╔*************╗
-        ║  CHALLENGE  ║
-        ╚*************╝
+		╔*************╗
+		║  CHALLENGE  ║
+		╚*************╝
 
-            add a new class, Pistol, that derives from Weapon.
-            Pistol should have fields with getters/setters for rounds and magCapacity.
-            Add a constructor that calls the base constructor
-	
+			add a new class, Pistol, that derives from Weapon.
+			Pistol should have fields with getters/setters for rounds and magCapacity.
+			Add a constructor that calls the base constructor
+
 	*/
 	Pistol pewpew(100, 200, 10, 16);
 
+	int n1 = 5, n2 = 2;
+	int sum = n1 + n2;
 
+	Account savings1(5000), savings2(10000);
+	Account savings3 = savings1 + savings2;
 
 
 
 	/*
-        ╔═════════════════════════════╗
-        ║  COMPILE-TIME Polymorphism  ║
-        ╚═════════════════════════════╝
+		╔═════════════════════════════╗
+		║  COMPILE-TIME Polymorphism  ║
+		╚═════════════════════════════╝
 
 		Method Overloading:
 			- changing the number of parameters
@@ -77,9 +99,9 @@ int main()
 
 
 	/*
-        ╔*************╗
-        ║  CHALLENGE  ║
-        ╚*************╝
+		╔*************╗
+		║  CHALLENGE  ║
+		╚*************╝
 
 			Add an OVERLOAD of the calcDamage method in the Weapon class.
 			The overload should take an int parameter called modifier
@@ -92,9 +114,9 @@ int main()
 
 
 	/*
-        ╔═════════════════════════════╗
-        ║  COMPILE-TIME Polymorphism  ║
-        ╚═════════════════════════════╝
+		╔═════════════════════════════╗
+		║  COMPILE-TIME Polymorphism  ║
+		╚═════════════════════════════╝
 
 		Operator Overloading
 
@@ -105,9 +127,9 @@ int main()
 
 
 	/*
-        ╔*************╗
-        ║  CHALLENGE  ║
-        ╚*************╝
+		╔*************╗
+		║  CHALLENGE  ║
+		╚*************╝
 
 		overload the + in the Pistol class to add 2 pistols
 			- it sets the magCapacity to the max of the 2 pistols
@@ -120,9 +142,9 @@ int main()
 
 
 	/*
-        ╔════════════════════════╗
-        ║  RUNTIME Polymorphism  ║
-        ╚════════════════════════╝
+		╔════════════════════════╗
+		║  RUNTIME Polymorphism  ║
+		╚════════════════════════╝
 
 		╔═════════════╗
 		║ OVERRIDING  ║ - changing the behavior of a base method
@@ -149,9 +171,9 @@ int main()
 
 
 	/*
-        ╔*************╗
-        ║  CHALLENGE  ║
-        ╚*************╝
+		╔*************╗
+		║  CHALLENGE  ║
+		╚*************╝
 
 			Override Weapon's showMe method in the Pistol class.
 			In Pistol's version, call the base version then print out the rounds and magCapacity
@@ -160,6 +182,7 @@ int main()
 
 	*/
 
+	//Weapon wpn(10, 20);
 
 
 }

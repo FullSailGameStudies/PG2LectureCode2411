@@ -34,6 +34,13 @@ private:
 	double mBalance;
 
 public:
+	Account(double balance) : mBalance(balance) {}
+
+	Account operator+(const Account& otherAcct)
+	{
+		Account newAcct(mBalance + otherAcct.mBalance);
+		return newAcct;
+	}
 };
 
 

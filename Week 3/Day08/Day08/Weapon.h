@@ -8,8 +8,8 @@ private:
 public:
 	Weapon(int range, int damage);
 
-	void showMe();
-	int calcDamage();
+	virtual void showMe();
+	virtual int calcDamage() = 0; //make it pure virtual
 
 	int range() const
 	{

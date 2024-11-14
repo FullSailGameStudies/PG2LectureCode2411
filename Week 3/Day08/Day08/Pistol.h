@@ -10,6 +10,9 @@ public:
 	{
 	}
 
+	void showMe() override;
+	int calcDamage() { return Weapon::calcDamage(); }
+
 	int Rounds() const { return rounds_; }
 	int MagCapacity() const { return magCapacity_; }
 

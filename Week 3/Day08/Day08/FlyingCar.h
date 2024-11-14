@@ -14,7 +14,11 @@ public:
 		altitude_(0),
 		maxAltitude_(maxAltitude)
 	{
+		//don't duplicate what the base ctor does
+		//mModelYear = year;//why is this bad?
 	}
+
+	std::string vehicleInformation() override;
 
 private:
 	//fields (data)

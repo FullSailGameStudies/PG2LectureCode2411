@@ -10,11 +10,15 @@ public:
 	Car(int year, std::string make, std::string model)
 		: mModelYear(year), mMake(make), mModel(model), mFuelLevel(0), mMaxFuelLevel(15)
 	{	}
-	std::string vehicleInformation();
+	virtual std::string vehicleInformation();
 
 	void refuel()
 	{
 		mFuelLevel = mMaxFuelLevel;
+	}
+	void refuel(int fuelAmount)//overloads MUST be different on the parameters
+	{
+		mFuelLevel = std::min(mMaxFuelLevel, mFuelLevel + fuelAmount);
 	}
 
 	//getter (accessor)
@@ -32,7 +36,7 @@ public:
 		}
 	}
 
-private:
+protected:
 	int mModelYear;
 	std::string mModel;
 	std::string mMake;
