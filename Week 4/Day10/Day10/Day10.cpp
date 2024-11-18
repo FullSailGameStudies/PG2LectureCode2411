@@ -164,4 +164,24 @@ int main()
     std::string multi = "Batman^Bruce Wayne^35#Superman^Clark Kent^25#Wonder Woman^Diana Prince^25#Aquaman^Arthur Curry^12";
     char collectionSeparator = '#';
     char objectSeparator = '^';
+    std::stringstream multiStream(multi);
+    std::cout << "\n\nThe new JLA\n";
+    while (!multiStream.eof())
+    {
+        std::string hero;
+        std::getline(multiStream, hero, collectionSeparator);
+
+        std::stringstream heroStream(hero);
+        std::string name,secret,heroData;
+        int age;
+
+        std::getline(heroStream, name, objectSeparator);
+        std::getline(heroStream, secret, objectSeparator);
+        std::getline(heroStream, heroData, objectSeparator);
+        age = std::stoi(heroData);
+
+        std::cout << "Hello citizen! I am " << name << " (aka " << secret;
+        std::cout << "). I am " << age << " years old!\n";
+    }
+
 }
