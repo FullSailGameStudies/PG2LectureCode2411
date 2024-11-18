@@ -49,6 +49,29 @@ int main()
         Lecture code: set a filePath variable, open an output file, write some csv data to it
     */
 
+    std::string fileName = "2411.csv";
+    std::string path = "C:\\temp\\2411\\";
+    std::string fullPath = path + fileName;
+
+    //1. Open the file
+    std::ofstream outFile(fullPath);
+    char delimiter = '^';
+    if (outFile.is_open())
+    {
+        //2. write the file
+        //  << insertion operator
+        outFile << "Batman rules!";
+        outFile << delimiter << 420.3 << delimiter << 12;
+        outFile << delimiter << true << delimiter << "Superman is an alien.";
+    }
+    else
+    {
+        std::cout << fullPath << " could not be opened.\n";
+    }
+
+
+    //3. Close the file
+    outFile.close();
 
     /*
 
@@ -62,6 +85,46 @@ int main()
 
         Lecture code: using the filePath variable, open an input file, use getline to read a line, print the line
     */
+
+    //1. open the file
+    std::ifstream inFile(fullPath);
+    if (inFile.is_open())
+    {
+        //2. read the file
+        std::string line;
+        //reads until a \n OR end-of-file
+        std::getline(inFile, line);
+
+        std::cout << line << "\n";
+
+        std::string data;
+        //stringstream
+        std::stringstream lineStream(line);
+        std::getline(lineStream, data, delimiter);
+        std::cout << data << "\n";
+
+        std::getline(lineStream, data, delimiter);
+        double dVal = std::stod(data);
+        std::cout << dVal << "\n";
+
+        std::getline(lineStream, data, delimiter);
+        int iVal = std::stoi(data);
+        std::cout << iVal << "\n";
+
+        std::getline(lineStream, data, delimiter);
+        bool bVal = std::stoi(data) == 1;
+        std::cout << bVal << "\n";
+
+        std::getline(lineStream, data, delimiter);
+        std::cout << data << "\n";
+    }
+    else
+    {
+        std::cout << fullPath << " could not be opened.\n";
+    }
+
+    //3. close the file
+    inFile.close();
 
 
     /*
