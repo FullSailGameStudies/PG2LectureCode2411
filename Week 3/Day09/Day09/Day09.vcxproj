@@ -128,10 +128,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Day09.cpp" />
+    <ClCompile Include="Knife.cpp" />
     <ClCompile Include="Pistol.cpp" />
     <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Knife.h" />
     <ClInclude Include="Pistol.h" />
     <ClInclude Include="Weapon.h" />
   </ItemGroup>

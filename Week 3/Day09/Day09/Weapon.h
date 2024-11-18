@@ -19,5 +19,8 @@ public:
 	{
 		return mDamage;
 	}
+
+	//static data is SHARED across ALL Weapon objects
+	static int numberOfWeapons;
 };
 

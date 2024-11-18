@@ -2,6 +2,10 @@
 //
 
 #include <iostream>
+#include <vector>
+#include "Weapon.h"
+#include "Knife.h"
+#include "Pistol.h"
 
 
 class base
@@ -13,7 +17,7 @@ public:
 	{
 
 	}
-	void print()
+	virtual void print()
 	{
 		std::cout << "Hello base " << mNum << "\n";
 	}
@@ -26,12 +30,64 @@ private:
 public:
 	derived(std::string str, int num) : base(num), mStr(str)
 	{ }
+	void print() override
+	{
+		base::print();
+		std::cout << "Hello derived " << mStr << "\n";
+	}
 };
 
 
 int main()
 {
+	std::vector<base> inv;
+	inv.push_back(base(10));
+	inv.push_back(derived("D1",15));//????? CONVERTS to a base
 
+	std::vector<base*> inv2;
+	inv2.push_back(new base(10));
+	inv2.push_back(new derived("D1", 15));//copies the POINTER
+
+	base* basePtr = new derived("D2",45);//UPCAST
+
+
+	base b1(25);
+	derived d1("D1", 15);
+	b1 = d1;//what happens? copies the base parts to b1
+
+	{
+		std::unique_ptr<base> pBase(new base(420));// std::make_unique<base>(420);
+		std::unique_ptr<base> pBaseOther = std::move(pBase);
+		pBaseOther->print();
+		(*pBaseOther).print();
+	}//pBase goes out of scope and its memory is deallocated (deleted)
+
+	base* pBase2 = new base(42);
+	base* pBase3 = pBase2;//shallow copy
+	pBase2->print();
+	(*pBase3).print();
+	delete pBase2;
+
+	int num = 5;
+	int* pNum = &num;
+	int& num2 = num;
+	std::cout << num << "\n" << pNum << "\t" << *pNum << "\n" << num2;
+
+	{
+		int* pNum2 = new int(5);//allocates on the HEAP
+		std::cout << "\n" << pNum2 << "\n" << *pNum2 << "\n";
+
+		int* pNum3 = pNum2;//copies the pointer
+
+		delete pNum2;//release the memory back to the runtime
+		pNum2 = nullptr;
+
+		std::cout << "\n" << pNum3 << "\n" << *pNum3 << "\n";
+
+		if (pNum2 != nullptr)
+			std::cout << "\n" << pNum2 << "\n" << *pNum2 << "\n";
+	}
+	std::cin.get();
 	/*
 		╔════════════╗
 		║ Unique_ptr ║
@@ -84,4 +140,31 @@ int main()
 		Loop over the vector and call showMe on each weapon.
 
 	*/
+
+	std::vector<std::unique_ptr<Weapon>> dorasBackpack;
+	dorasBackpack.push_back(std::make_unique<Knife>(5, 10, true, 0.2f));
+	dorasBackpack.push_back(std::make_unique<Knife>(5, 10, true, 0.5f));
+	dorasBackpack.push_back(std::make_unique<Knife>(5, 10, true, 1.2f));
+	std::unique_ptr<Pistol> pewpew(new Pistol(50, 100, 15, 5));
+	dorasBackpack.push_back(std::move(pewpew));
+
+	std::cout << "\n\nDora's Backpack\n";
+	for (auto& wpn : dorasBackpack)
+	{
+		wpn->showMe();
+	}
+	std::cout << "\n\n";
+
+	//dorasBackpack.push_back(std::make_unique<base>(15));
+
+	Weapon* wpnPtr;
+	wpnPtr = new Knife(5, 10, true, 0.3F);
+	wpnPtr = new Pistol(50, 100, 15, 5);
+
+	Knife stab(5, 10, true, 0.3F);
+	stab.showMe();
+	stab.DescribeMe();
+	Knife::DescribeMe();
+
+	wpnPtr->showMe();//which showMe gets called? RUNTIME polymorphism
 }
