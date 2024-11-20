@@ -23,7 +23,18 @@ public:
 		Deserialize(csvData, delim);
 	}
 
+	/// <summary>
+	/// Saves the object in CSV format
+	/// </summary>
+	/// <param name="outstream">the out stream to serialize to</param>
+	/// <param name="delim">The delimiter to use to separate the data</param>
 	void Serialize(std::ostream& outstream, char delim) const;
+
+	/// <summary>
+	/// Will deserialize the Car object from CSV format
+	/// </summary>
+	/// <param name="csvData">string of csv data. should contain year,make,model</param>
+	/// <param name="delim">The csv separator</param>
 	void Deserialize(const std::string& csvData, char delim);
 
 	int ModelYear() const  //const says the method can't modify anything
